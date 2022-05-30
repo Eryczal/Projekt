@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-22 16:02:26
+/* Smarty version 4.1.0, created on 2022-05-28 11:51:43
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\Profile.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_628a4272e8c160_02005792',
+  'unifunc' => 'content_6291f0af93b015_32845646',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8cc01e34996c94a53e28b32c19257aaad3feda8d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Profile.tpl',
-      1 => 1653228086,
+      1 => 1653581290,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_628a4272e8c160_02005792 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6291f0af93b015_32845646 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1007314544628a4272e82713_02124484', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_552191396291f0af930f11_86960441', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_61869255628a4272e8b665_00239298', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20737441756291f0af93a4e3_34278328', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_1007314544628a4272e82713_02124484 extends Smarty_Internal_Block
+class Block_552191396291f0af930f11_86960441 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_1007314544628a4272e82713_02124484',
+    0 => 'Block_552191396291f0af930f11_86960441',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -76,9 +76,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
         </a>
     </li>
     <hr style="margin-top:30px">
-    <p>Zalogowano jako: <?php echo $_smarty_tpl->tpl_vars['rola']->value;?>
+    <p>Zalogowano jako: <?php echo $_smarty_tpl->tpl_vars['role']->value;?>
 </p>
-    <?php if ($_smarty_tpl->tpl_vars['rola']->value == "Administrator") {?>
+    <?php if ($_smarty_tpl->tpl_vars['role']->value == "Administrator") {?>
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
@@ -93,21 +93,21 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_61869255628a4272e8b665_00239298 extends Smarty_Internal_Block
+class Block_20737441756291f0af93a4e3_34278328 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_61869255628a4272e8b665_00239298',
+    0 => 'Block_20737441756291f0af93a4e3_34278328',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
     <h3>Mój profil</h3>
-    <p>Zalogowano jako: <?php echo $_smarty_tpl->tpl_vars['nick']->value;?>
+    <p>Twój login: <?php echo $_smarty_tpl->tpl_vars['nick']->value;?>
 </p>
-    <p>Twoja rola: <?php echo $_smarty_tpl->tpl_vars['rola']->value;?>
+    <p>Zalogowany jako: <?php echo $_smarty_tpl->tpl_vars['role']->value;?>
 </p>
 <?php
 }

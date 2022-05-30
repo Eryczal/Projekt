@@ -16,7 +16,7 @@ class ProfileCtrl {
         } elseif(RoleUtils::inRole("admin")) {
             $r = "Administrator";
         }
-        App::getSmarty()->assign("rola", $r);
+        App::getSmarty()->assign("role", $r);
         App::getSmarty()->assign("nick", $_SESSION["_todo_app_nick"]);
         App::getSmarty()->display("Profile.tpl");
         

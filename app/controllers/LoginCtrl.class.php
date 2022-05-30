@@ -55,6 +55,7 @@ class LoginCtrl {
                                 break;
                         }
                         $_SESSION["_todo_app_nick"] = $record[0]["login"];
+                        $_SESSION["_todo_app_id"] = $record[0]["id"];
                         RoleUtils::addRole($role);
                         App::getRouter()->redirectTo("profile");
                     } else {

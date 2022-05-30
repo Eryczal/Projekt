@@ -28,31 +28,38 @@ class RegisterCtrl {
                 'validator_message' => "Dane są niepoprawne."
             ]);
             if($v->isLastOk()) {
-                $pass = $v->validateFromPost("pass", [
-                    'required' => true,
-                    'required_message' => "Hasło jest wymagane do rejestracji.",
-                    'min_length' => 8,
-                    'max_length' => 128,
-                    'validator_message' => "Dane są niepoprawne."
+                $record = App::getDB()->select("users", "*", [
+                    "login" => $login
                 ]);
-                if($v->isLastOk()) {
-                    $conf = $v->validateFromPost("conf", [
+                if(count($record) > 0) {
+                    App::getMessages()->addMessage(new \core\Message("Podany login jest zajęty.", \core\Message::ERROR));
+                } else {
+                    $pass = $v->validateFromPost("pass", [
                         'required' => true,
-                        'required_message' => "Hasło należy potwórzyć.",
+                        'required_message' => "Hasło jest wymagane do rejestracji.",
                         'min_length' => 8,
                         'max_length' => 128,
                         'validator_message' => "Dane są niepoprawne."
                     ]);
                     if($v->isLastOk()) {
-                        if($pass == $conf) {
-                            App::getDB()->insert("users", [
-                                "login" => $login,
-                                "pass" => password_hash($pass, PASSWORD_DEFAULT),
-                                "role" => 0
-                            ]);
-                            App::getMessages()->addMessage(new \core\Message("Poprawnie stworzono użytkownika.", \core\Message::INFO));
-                        } else {
-                            App::getMessages()->addMessage(new \core\Message("Podane hasła nie są takie same.", \core\Message::ERROR));
+                        $conf = $v->validateFromPost("conf", [
+                            'required' => true,
+                            'required_message' => "Hasło należy potwórzyć.",
+                            'min_length' => 8,
+                            'max_length' => 128,
+                            'validator_message' => "Dane są niepoprawne."
+                        ]);
+                        if($v->isLastOk()) {
+                            if($pass == $conf) {
+                                App::getDB()->insert("users", [
+                                    "login" => $login,
+                                    "pass" => password_hash($pass, PASSWORD_DEFAULT),
+                                    "role" => 0
+                                ]);
+                                App::getMessages()->addMessage(new \core\Message("Poprawnie stworzono użytkownika.", \core\Message::INFO));
+                            } else {
+                                App::getMessages()->addMessage(new \core\Message("Podane hasła nie są takie same.", \core\Message::ERROR));
+                            }
                         }
                     }
                 }

@@ -150,6 +150,34 @@ a {
     background-color: #fff;
     text-align: center;
 }
+table {
+    margin: auto;
+}
+td, th {
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 2px 0 #ccc;
+}
+
+.mdi-delete-forever {
+    color: #f00;
+    cursor: pointer;
+}
+
+.edit-button {
+    visibility: hidden;
+    font-size: 0.85em;
+    cursor: pointer;
+}
+
+.editable:hover .edit-button {
+    visibility: visible;
+}
+
+.mdi-arrow-all {
+    cursor: grab;
+}
+
 @media screen and (max-width: 800px) {
     .navbar-header {
         width: 100%;

@@ -26,8 +26,8 @@
         </a>
     </li>
     <hr style="margin-top:30px">
-    <p>Zalogowano jako: {$rola}</p>
-    {if $rola eq "Administrator"}
+    <p>Zalogowano jako: {$role}</p>
+    {if $role eq "Administrator"}
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
@@ -41,12 +41,38 @@
 
 {block name=page}
     <h3>Moje listy</h3>
-    <form action="{url action='loginuser'}" method="post">
-        <p><label>Login: <input type="text" name="login"></label></p>
-        <p><label>Hasło: <input type="password" name="pass"></label></p>
-        <input type="submit" value="Zaloguj">
-    </form>
-    <p>Nie masz konta? <a href="{url action='register'}">Zarejestruj się</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Priorytet</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="t_b">
+        {if $lists != 1 && count((array)$lists) > 0}
+            {foreach $lists as $key=>$list}
+                <tr id="list_{$key}">
+                    <td id="plist_{$list['id']}" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="{$key}" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
+                    <td id="id_{$key}">{$list["id"]}</td>
+                    <td>{$list["name"]}</td>
+                    <td>{$list["description"]}</td>
+                    <td>{$list["priority"]}</td>
+                    <td><a href="{$conf->app_url}/list/{$list['id']}"><i class="mdi mdi-dots-vertical"></i></a></td>
+                    <td><i onclick="removeList({$list['id']})" class="mdi mdi-delete-forever"></i></td>
+                </tr>
+            {/foreach}
+        {else} 
+            <tr id="e_u_l"><td colspan="4">Nie masz jeszcze żadnej listy.</td></tr>
+        {/if}
+        </tbody>
+    </table>
+    <div ondrop="dropList(event)" ondragover="dragOverList(event)">test</div>
+    <input type="button" id="addList" value="Dodaj listę">
     {foreach $msgs->getMessages() as $msg}
         <div class="alert {if $msg->isInfo()}alert-success{/if}
             {if $msg->isWarning()}alert-warning{/if}
@@ -54,4 +80,5 @@
             {$msg->text}
         </div>
     {/foreach}
+    <script src="{$conf->app_url}/js/lists.js"></script>
 {/block}
