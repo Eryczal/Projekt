@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-31 21:52:01
+/* Smarty version 4.1.0, created on 2022-06-01 21:21:17
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\Lists.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_629671e171dfc9_37286387',
+  'unifunc' => 'content_6297bc2d85d932_32875753',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd270fa9ed3f3a7b0ad37622f6da00ce4d9bb1377' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Lists.tpl',
-      1 => 1654026699,
+      1 => 1654111275,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_629671e171dfc9_37286387 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6297bc2d85d932_32875753 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1351729808629671e1705e42_66391791', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6025956746297bc2d840268_35098492', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1347860918629671e170eb70_91832357', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9433078326297bc2d84aaa8_14898260', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_1351729808629671e1705e42_66391791 extends Smarty_Internal_Block
+class Block_6025956746297bc2d840268_35098492 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_1351729808629671e1705e42_66391791',
+    0 => 'Block_6025956746297bc2d840268_35098492',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -93,18 +93,18 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_1347860918629671e170eb70_91832357 extends Smarty_Internal_Block
+class Block_9433078326297bc2d84aaa8_14898260 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_1347860918629671e170eb70_91832357',
+    0 => 'Block_9433078326297bc2d84aaa8_14898260',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-    <h3>Moje listy</h3>
+    <h3 style="text-align: center">Moje listy</h3>
     <table>
         <thead>
             <tr>
@@ -153,8 +153,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         <?php }?>
         </tbody>
     </table>
-    <div ondrop="dropList(event)" ondragover="dragOverList(event)">test</div>
-    <input type="button" id="addList" value="Dodaj listę">
+    <div class="button_container"><input type="button" id="addList" value="Dodaj listę"></div>
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['msgs']->value->getMessages(), 'msg');
 $_smarty_tpl->tpl_vars['msg']->do_else = true;

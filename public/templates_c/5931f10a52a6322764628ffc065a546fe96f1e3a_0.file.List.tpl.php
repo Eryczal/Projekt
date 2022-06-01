@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-29 22:15:28
+/* Smarty version 4.1.0, created on 2022-06-01 20:33:12
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\List.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6293d4606f4de2_03412016',
+  'unifunc' => 'content_6297b0e8258987_84701115',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5931f10a52a6322764628ffc065a546fe96f1e3a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\List.tpl',
-      1 => 1653855308,
+      1 => 1654108390,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6293d4606f4de2_03412016 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6297b0e8258987_84701115 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_399608186293d4606de5a4_78523785', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_936223026297b0e823d0b2_22056949', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18885618166293d4606e8386_97009851', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18861680986297b0e8246df3_62729198', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_399608186293d4606de5a4_78523785 extends Smarty_Internal_Block
+class Block_936223026297b0e823d0b2_22056949 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_399608186293d4606de5a4_78523785',
+    0 => 'Block_936223026297b0e823d0b2_22056949',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -93,12 +93,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_18885618166293d4606e8386_97009851 extends Smarty_Internal_Block
+class Block_18861680986297b0e8246df3_62729198 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_18885618166293d4606e8386_97009851',
+    0 => 'Block_18861680986297b0e8246df3_62729198',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -120,12 +120,33 @@ $_smarty_tpl->tpl_vars['msg']->do_else = false;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         <?php if ($_smarty_tpl->tpl_vars['list']->value != "error") {?>
-            <?php echo var_dump($_smarty_tpl->tpl_vars['list']->value);?>
-
-            <h1 class="editable"><?php echo $_smarty_tpl->tpl_vars['list']->value[0]["name"];?>
- <i class="edit-button mdi mdi-pencil-outline"></i></h1>
-            <p class="editable"><?php echo $_smarty_tpl->tpl_vars['list']->value[0]["description"];?>
- <i class="edit-button mdi mdi-pencil-outline"></i></p>
+            <div class="edit_container">
+                <div id="name_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="list_header ib editable"><?php echo $_smarty_tpl->tpl_vars['list']->value[0]["name"];?>
+</div>
+                <i onclick="editList('name', <?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+)" class="edit-button list_header mdi mdi-pencil-outline"></i>
+                <div id="name_eb_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="editButtons"></div>
+            </div>
+            <div class="edit_container">
+                <div id="description_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="ib editable"><?php echo $_smarty_tpl->tpl_vars['list']->value[0]["description"];?>
+</div>
+                <i onclick="editList('description', <?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+)" class="edit-button mdi mdi-pencil-outline"></i>
+                <div id="description_eb_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="editButtons"></div>
+            </div>
+            <div class="edit_container">
+                <div class="ib editable">Priorytet: <div id="priority_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="ib"><?php echo $_smarty_tpl->tpl_vars['list']->value[0]["priority"];?>
+</div></div>
+                <i onclick="editList('priority', <?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+)" class="edit-button mdi mdi-pencil-outline"></i>
+                <div id="priority_eb_<?php echo $_smarty_tpl->tpl_vars['list']->value[0]['id'];?>
+" class="editButtons"></div>
+            </div>
             
             <div id="list_tasks">
             </div>

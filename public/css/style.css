@@ -170,8 +170,89 @@ td, th {
     cursor: pointer;
 }
 
-.editable:hover .edit-button {
+.edit_container:hover .edit-button {
     visibility: visible;
+}
+
+.editing .edit-button {
+    display: none;
+}
+
+.editButtons {
+    display: inline-block;
+}
+
+.inedit {
+    border: 3px dotted #aaa;
+    padding: 10px;
+}
+
+.button_container {
+    text-align: center;
+}
+
+#addList {
+    margin: 10px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #26c6da;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    padding: 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 1px 1px 5px 0 #666;
+    transition: 0.15s ease-in-out;
+}
+
+#addList:hover {
+    background-color: #219faf;
+}
+
+#addList:active {
+    transform: scale(0.85);
+}
+
+.cancel_button {
+    display: inline-block;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #f32424;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    padding: 5px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.cancel_button:hover {
+    background-color: #b81d1d;
+}
+
+.approve_button {
+    display: inline-block;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #5fd068;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    padding: 5px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.approve_button:hover {
+    background-color: rgb(68, 150, 75);
+}
+
+.list_header {
+    font-size: 2.6em;
+    font-weight: bold;
+}
+
+.ib {
+    display: inline-block;
 }
 
 .mdi-arrow-all {

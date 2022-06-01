@@ -7,6 +7,7 @@ use core\Message;
 use core\ParamUtils;
 use core\RoleUtils;
 use core\Utils;
+use core\Validator;
 
 class ListsCtrl {
     
@@ -85,52 +86,100 @@ class ListsCtrl {
     }
 
     public function action_movelist() {
-        // $id = ParamUtils::getFromPost("id", true, "Błąd");
-        // $new_pos = ParamUtils::getFromPost("new_pos", true, "Błąd");
+        $id = ParamUtils::getFromPost("id", true, "Błąd");
 
-        // $todoList = App::getDB()->select("todos", "*", [
-        //     "id" => $id
-        // ])[0];
+        $newPos = ParamUtils::getFromPost("newPos", true, "Błąd");
+        $oldPos = ParamUtils::getFromPost("oldPos", true, "Błąd");
 
-        // if($new_pos != $todoList["position"]) {
-        //     if(RoleUtils::inRole("admin") || $todoList["user_id"] == $_SESSION["_todo_app_id"]) {
-        //         if($todoList["position"] > $new_pos) {
-        //             App::getDB()->update("todos", [
-        //                 "position[-]" => 1
-        //             ], [
-        //                 "AND" => [
-        //                     "user_id" => $todoList["user_id"],
-        //                     "position[>]" => $todoList["position"],
-        //                     "position[<]" => $new_pos
-        //                 ]
-        //             ]);
-        //         } else {
-        //             App::getDB()->update("todos", [
-        //                 "position[+]" => 1
-        //             ], [
-        //                 "AND" => [
-        //                     "user_id" => $todoList["user_id"],
-        //                     "position[<]" => $todoList["position"],
-        //                     "position[>]" => $new_pos
-        //                 ]
-        //             ]);
-        //         }
-    
-        //         App::getDB()->update("todos", [
-        //             "position" => $new_pos
-        //         ], [
-        //             "id" => $id
-        //         ]);
-    
-        //         echo $todoList["user_id"];
-    
-        //         echo 1;
-        //     } else {
-        //         echo 0;
-        //     }
-        // } else {
-        //     echo 0;
-        // }
+        $userId = $_SESSION["_todo_app_id"];
+
+        if($oldPos < $newPos) {
+            App::getDB()->update("todos", [
+                "position[-]" => 1
+            ], [
+                "user_id" => $userId,
+                "position[>]" => $oldPos,
+                "position[<=]" => $newPos
+            ]);
+        } elseif($oldPos > $newPos) {
+            App::getDB()->update("todos", [
+                "position[+]" => 1
+            ], [
+                "user_id" => $userId,
+                "position[<]" => $oldPos,
+                "position[>=]" => $newPos
+            ]);
+        }
+            
+        App::getDB()->update("todos", [
+            "position" => $newPos
+        ], [
+            "user_id" => $userId,
+            "id" => $id
+        ]);
+
+        echo 1;
+    }
+
+    public function action_renamelist() {
+        $id = ParamUtils::getFromPost("id", true, "Błąd");
+        $value = ParamUtils::getFromPost("value", true, "Błąd");
+
+        $userId = $_SESSION["_todo_app_id"];
+
+        App::getDB()->update("todos", [
+            "name" => $value
+        ], [
+            "id" => $id,
+            "user_id" => $userId
+        ]);
+
+        echo 1;
+    }
+
+    public function action_redescriptionlist() {
+        $id = ParamUtils::getFromPost("id", true, "Błąd");
+        $value = ParamUtils::getFromPost("value", true, "Błąd");
+
+        $userId = $_SESSION["_todo_app_id"];
+
+        App::getDB()->update("todos", [
+            "description" => $value
+        ], [
+            "id" => $id,
+            "user_id" => $userId
+        ]);
+
+        echo 1;
+    }
+
+    public function action_reprioritizelist() {
+        $id = ParamUtils::getFromPost("id", true, "Błąd");
+
+        $v = new Validator();
+
+        $v->validateFromPost("value", [
+            'int' => true
+        ]);
+
+        $value = intval(ParamUtils::getFromPost("value", true, "Błąd"));
+
+        if($value < 0) {
+            echo 0;
+
+            return;
+        }
+
+        $userId = $_SESSION["_todo_app_id"];
+
+        App::getDB()->update("todos", [
+            "priority" => $value
+        ], [
+            "id" => $id,
+            "user_id" => $userId
+        ]);
+
+        echo 1;
     }
 
     public function action_list() {

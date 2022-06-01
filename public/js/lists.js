@@ -12,7 +12,7 @@ document.getElementById("addList").addEventListener("click", () => {
                     <td>${response[0].name}</td>
                     <td>${response[0].description}</td>
                     <td>${response[0].priority}</td>
-                    <td><a href="#"><i class="mdi mdi-dots-vertical"></i></a></td>
+                    <td><a href="http://192.168.1.16/Strony/Projekt/public/list/${response[0].id}"><i class="mdi mdi-dots-vertical"></i></a></td>
                     <td><i onclick="removeList(${response[0].id})" class="mdi mdi-delete-forever"></i></td>
                  </tr>`
             );
@@ -51,14 +51,14 @@ function dropList(event) {
     var listID = event.dataTransfer.getData("text");
     var oldPos = getPos(listID);
     var newPos = getPos(event.currentTarget.children[0].id);
-    console.log("Lista <" + listID + "> na listę <" + event.currentTarget.children[0].id + ">")
-    console.log("Zmiana pozycji: " + oldPos + "->" + newPos)
-    console.log("- - - - -")
+    
     event.currentTarget.parentNode.parentNode.insertBefore(document.getElementById("list_" + listID), oldPos < newPos ? event.currentTarget.parentNode.nextSibling : event.currentTarget.parentNode);
-    /*var formData = new FormData();
-    formData.append("id", id);
-    formData.append("new_pos", newPos);*/
-    /*fetch("http://192.168.1.16/Strony/Projekt/public/movelist", {
+    
+    var formData = new FormData();
+    formData.append("id", listID);
+    formData.append("oldPos", oldPos);
+    formData.append("newPos", newPos);
+    fetch("http://192.168.1.16/Strony/Projekt/public/movelist", {
         method: "POST",
         body: formData
     })
@@ -66,11 +66,11 @@ function dropList(event) {
             return response.ok ? response.text() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
         })
         .then(response => {
-            alert(response)
+            if(response != 1) window.location.reload();
         })
         .catch(error => {
             console.error(error);
-        });*/
+        });
 }
 
 function dragOverList(event) {

@@ -48,9 +48,21 @@
             </div>
         {/foreach}
         {if $list neq "error"}
-            {var_dump($list)}
-            <h1 class="editable">{$list[0]["name"]} <i class="edit-button mdi mdi-pencil-outline"></i></h1>
-            <p class="editable">{$list[0]["description"]} <i class="edit-button mdi mdi-pencil-outline"></i></p>
+            <div class="edit_container">
+                <div id="name_{$list[0]['id']}" class="list_header ib editable">{$list[0]["name"]}</div>
+                <i onclick="editList('name', {$list[0]['id']})" class="edit-button list_header mdi mdi-pencil-outline"></i>
+                <div id="name_eb_{$list[0]['id']}" class="editButtons"></div>
+            </div>
+            <div class="edit_container">
+                <div id="description_{$list[0]['id']}" class="ib editable">{$list[0]["description"]}</div>
+                <i onclick="editList('description', {$list[0]['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                <div id="description_eb_{$list[0]['id']}" class="editButtons"></div>
+            </div>
+            <div class="edit_container">
+                <div class="ib editable">Priorytet: <div id="priority_{$list[0]['id']}" class="ib">{$list[0]["priority"]}</div></div>
+                <i onclick="editList('priority', {$list[0]['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                <div id="priority_eb_{$list[0]['id']}" class="editButtons"></div>
+            </div>
             
             <div id="list_tasks">
             </div>

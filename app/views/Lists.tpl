@@ -40,7 +40,7 @@
 {/block}
 
 {block name=page}
-    <h3>Moje listy</h3>
+    <h3 style="text-align: center">Moje listy</h3>
     <table>
         <thead>
             <tr>
@@ -71,8 +71,7 @@
         {/if}
         </tbody>
     </table>
-    <div ondrop="dropList(event)" ondragover="dragOverList(event)">test</div>
-    <input type="button" id="addList" value="Dodaj listę">
+    <div class="button_container"><input type="button" id="addList" value="Dodaj listę"></div>
     {foreach $msgs->getMessages() as $msg}
         <div class="alert {if $msg->isInfo()}alert-success{/if}
             {if $msg->isWarning()}alert-warning{/if}
