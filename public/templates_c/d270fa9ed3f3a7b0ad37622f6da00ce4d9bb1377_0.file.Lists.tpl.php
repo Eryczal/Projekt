@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-29 21:27:06
+/* Smarty version 4.1.0, created on 2022-05-31 21:52:01
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\Lists.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6293c90ae35014_46547458',
+  'unifunc' => 'content_629671e171dfc9_37286387',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd270fa9ed3f3a7b0ad37622f6da00ce4d9bb1377' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Lists.tpl',
-      1 => 1653852369,
+      1 => 1654026699,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6293c90ae35014_46547458 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629671e171dfc9_37286387 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8060441386293c90ae1c662_99292115', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1351729808629671e1705e42_66391791', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2225597096293c90ae257a7_21813152', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1347860918629671e170eb70_91832357', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_8060441386293c90ae1c662_99292115 extends Smarty_Internal_Block
+class Block_1351729808629671e1705e42_66391791 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_8060441386293c90ae1c662_99292115',
+    0 => 'Block_1351729808629671e1705e42_66391791',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -93,12 +93,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_2225597096293c90ae257a7_21813152 extends Smarty_Internal_Block
+class Block_1347860918629671e170eb70_91832357 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_2225597096293c90ae257a7_21813152',
+    0 => 'Block_1347860918629671e170eb70_91832357',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -125,12 +125,12 @@ $_smarty_tpl->tpl_vars['list']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['list']->value) {
 $_smarty_tpl->tpl_vars['list']->do_else = false;
 ?>
-                <tr id="list_<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+                <tr id="list_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 ">
                     <td id="plist_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
-                    <td id="id_<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+                    <td id="id_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['list']->value["id"];?>
 </td>
                     <td><?php echo $_smarty_tpl->tpl_vars['list']->value["name"];?>

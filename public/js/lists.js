@@ -48,22 +48,17 @@ function dragList(event) {
 
 function dropList(event) {
     event.preventDefault();
-    var data = event.dataTransfer.getData("text");
-    var id = document.getElementById("id_" + data).textContent;
-    var newPos;
-    event.currentTarget.parentNode.parentNode.insertBefore(document.getElementById("list_" + data), event.currentTarget.parentNode.nextSibling);
-    for(let i = 0; i < document.getElementsByClassName("mdi-arrow-all").length; i++) {
-        console.log(document.getElementsByClassName("mdi-arrow-all")[i].id)
-        if(document.getElementsByClassName("mdi-arrow-all")[i].id == data) {
-            newPos = i + 1;
-            break;
-        }
-    }
-    var formData = new FormData();
+    var listID = event.dataTransfer.getData("text");
+    var oldPos = getPos(listID);
+    var newPos = getPos(event.currentTarget.children[0].id);
+    console.log("Lista <" + listID + "> na listę <" + event.currentTarget.children[0].id + ">")
+    console.log("Zmiana pozycji: " + oldPos + "->" + newPos)
+    console.log("- - - - -")
+    event.currentTarget.parentNode.parentNode.insertBefore(document.getElementById("list_" + listID), oldPos < newPos ? event.currentTarget.parentNode.nextSibling : event.currentTarget.parentNode);
+    /*var formData = new FormData();
     formData.append("id", id);
-    formData.append("new_pos", newPos);
-    console.log("pos: "+newPos);
-    fetch("http://192.168.1.16/Strony/Projekt/public/movelist", {
+    formData.append("new_pos", newPos);*/
+    /*fetch("http://192.168.1.16/Strony/Projekt/public/movelist", {
         method: "POST",
         body: formData
     })
@@ -75,9 +70,17 @@ function dropList(event) {
         })
         .catch(error => {
             console.error(error);
-        });
+        });*/
 }
 
 function dragOverList(event) {
     event.preventDefault();
+}
+
+function getPos(id) {
+    for(let i = 0; i < document.getElementsByClassName("mdi-arrow-all").length; i++) {
+        if(document.getElementsByClassName("mdi-arrow-all")[i].id == id) {
+            return i + 1;
+        }
+    }
 }

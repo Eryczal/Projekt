@@ -56,9 +56,9 @@
         <tbody id="t_b">
         {if $lists != 1 && count((array)$lists) > 0}
             {foreach $lists as $key=>$list}
-                <tr id="list_{$key}">
-                    <td id="plist_{$list['id']}" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="{$key}" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
-                    <td id="id_{$key}">{$list["id"]}</td>
+                <tr id="list_{$list['id']}">
+                    <td id="plist_{$list['id']}" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="{$list['id']}" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
+                    <td id="id_{$list['id']}">{$list["id"]}</td>
                     <td>{$list["name"]}</td>
                     <td>{$list["description"]}</td>
                     <td>{$list["priority"]}</td>
