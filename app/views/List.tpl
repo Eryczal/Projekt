@@ -65,8 +65,59 @@
             </div>
             
             <div id="list_tasks">
+                {if $tasks != 1 && count((array)$tasks) > 0}
+                    {foreach $tasks as $key=>$task}
+                        <div class="task" id="ptask_{$task['id']}">
+                            <div class="task_container">
+                                <div class="edit_task_position" id="etask_{$task['id']}" ondrop="dropTask(event)" ondragover="dragOverTask(event)">
+                                    <i id="{$task['id']}" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all"></i>
+                                </div>
+                                <div class="remove_task" id="rtask_{$task['id']}">
+                                    <i id="r_{$task['id']}" onclick="removeTask({$task['id']})" class="mdi mdi-delete-forever"></i>
+                                </div>
+                                <div class="task_priority">
+                                    <div class="edit_container">
+                                        <div class="ib editable">Priorytet: <div id="taskpriority_{$task['id']}" class="ib">{$task["priority"]}</div></div>
+                                        <i onclick="editList('taskpriority', {$task['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskpriority_eb_{$task['id']}" class="editButtons"></div>
+                                    </div>
+                                </div>
+                                <div class="task_info">
+                                    <div class="edit_container">
+                                        <div id="taskname_{$task['id']}" class="ib editable taskname">{$task['name']}</div>
+                                        <i onclick="editList('taskname', {$task['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskname_eb_{$task['id']}" class="editButtons"></div>
+                                    </div>
+                                    <div class="edit_container">
+                                        <div id="taskdescription_{$task['id']}" class="ib editable">{$task['description']}</div>
+                                        <i onclick="editList('taskdescription', {$task['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskdescription_eb_{$task['id']}" class="editButtons"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="steps" id="steps_{$task['id']}">
+                                {if $steps[$key] != 1 && count((array)$steps[$key]) > 0}
+                                    {foreach $steps[$key] as $step}
+                                        <div>
+                                            <p>{$step['name']}</p>
+                                            <p>{$step['description']}</p>
+                                            <input type="button" id="removeStep_{$step['id']}" value="Usuń krok">
+                                        </div>
+                                    {/foreach}
+
+                                    <div class="button_container"><input type="button" id="addStep" value="Dodaj krok"></div>
+                                {else}
+                                    <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
+                                {/if}
+                                <input type="button" onclick="addStep({$task['id']})" class="addButton" value="Dodaj krok">
+                            </div>
+                        </div>
+                    {/foreach}
+                {else}
+                    <p>Lista nie ma jeszcze żadnych zadań.</p>
+                {/if}
             </div>
-            <input type="button" id="addTask" value="Dodaj zadanie">
+            <input type="button" id="addTask" class="addButton" value="Dodaj zadanie">
             <script src="{$conf->app_url}/js/list.js"></script>
         {else}
             <a href="{$conf->app_url}/lists">Wróć do przeglądania Twoich list</a>

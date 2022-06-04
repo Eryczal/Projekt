@@ -40,7 +40,10 @@
 {/block}
 
 {block name=page}
-    <h3 style="text-align: center">Moje listy</h3>
+    <div style="text-align: center">
+        <h3>Moje listy</h3>
+        <p>Liczba twoich list: <span id="listnum">{$listnum}</span>.</p>
+    </div>
     <table>
         <thead>
             <tr>
@@ -71,7 +74,8 @@
         {/if}
         </tbody>
     </table>
-    <div class="button_container"><input type="button" id="addList" value="Dodaj listę"></div>
+    <div style="text-align: center" id="links"></div>
+    <div class="button_container"><input type="button" id="addList" class="addButton" value="Dodaj listę"></div>
     {foreach $msgs->getMessages() as $msg}
         <div class="alert {if $msg->isInfo()}alert-success{/if}
             {if $msg->isWarning()}alert-warning{/if}

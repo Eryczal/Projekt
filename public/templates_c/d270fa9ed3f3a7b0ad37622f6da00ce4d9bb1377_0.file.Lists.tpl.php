@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-06-01 21:21:17
+/* Smarty version 4.1.0, created on 2022-06-04 13:18:35
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\Lists.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6297bc2d85d932_32875753',
+  'unifunc' => 'content_629b3f8b55d965_10958740',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd270fa9ed3f3a7b0ad37622f6da00ce4d9bb1377' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Lists.tpl',
-      1 => 1654111275,
+      1 => 1654341510,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6297bc2d85d932_32875753 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629b3f8b55d965_10958740 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6025956746297bc2d840268_35098492', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_993253997629b3f8b544318_55692242', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9433078326297bc2d84aaa8_14898260', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1247264938629b3f8b54d916_81225908', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_6025956746297bc2d840268_35098492 extends Smarty_Internal_Block
+class Block_993253997629b3f8b544318_55692242 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_6025956746297bc2d840268_35098492',
+    0 => 'Block_993253997629b3f8b544318_55692242',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -93,18 +93,22 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_9433078326297bc2d84aaa8_14898260 extends Smarty_Internal_Block
+class Block_1247264938629b3f8b54d916_81225908 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_9433078326297bc2d84aaa8_14898260',
+    0 => 'Block_1247264938629b3f8b54d916_81225908',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-    <h3 style="text-align: center">Moje listy</h3>
+    <div style="text-align: center">
+        <h3>Moje listy</h3>
+        <p>Liczba twoich list: <span id="listnum"><?php echo $_smarty_tpl->tpl_vars['listnum']->value;?>
+</span>.</p>
+    </div>
     <table>
         <thead>
             <tr>
@@ -153,7 +157,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         <?php }?>
         </tbody>
     </table>
-    <div class="button_container"><input type="button" id="addList" value="Dodaj listę"></div>
+    <div style="text-align: center" id="links"></div>
+    <div class="button_container"><input type="button" id="addList" class="addButton" value="Dodaj listę"></div>
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['msgs']->value->getMessages(), 'msg');
 $_smarty_tpl->tpl_vars['msg']->do_else = true;

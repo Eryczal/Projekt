@@ -7,20 +7,31 @@ App::getRouter()->setDefaultRoute('main'); #default action
 App::getRouter()->setLoginRoute('login'); #action to forward if no permissions
 
 Utils::addRoute('main', 'MainCtrl');
+
 Utils::addRoute('login', 'LoginCtrl');
 Utils::addRoute('loginuser', 'LoginCtrl');
+Utils::addRoute('logout', 'LogoutCtrl', ["user", "admin"]);
+
 Utils::addRoute('register', 'RegisterCtrl');
 Utils::addRoute('registeruser', 'RegisterCtrl');
+
 Utils::addRoute('profile', 'ProfileCtrl', ["user", "admin"]);
+Utils::addRoute('settings', 'SettingsCtrl', ["user", "admin"]);
+
 Utils::addRoute('lists', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('list', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('addlist', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('movelist', 'ListsCtrl', ["user", "admin"]);
+Utils::addRoute('deletelist', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('renamelist', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('redescriptionlist', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('reprioritizelist', 'ListsCtrl', ["user", "admin"]);
-Utils::addRoute('addtask', 'ListsCtrl', ["user", "admin"]);
-Utils::addRoute('addstep', 'ListsCtrl', ["user", "admin"]);
-Utils::addRoute('deletelist', 'ListsCtrl', ["user", "admin"]);
-Utils::addRoute('settings', 'SettingsCtrl', ["user", "admin"]);
-Utils::addRoute('logout', 'LogoutCtrl', ["user", "admin"]);
+
+Utils::addRoute('addtask', 'TasksCtrl', ["user", "admin"]);
+Utils::addRoute('movetask', 'TasksCtrl', ["user", "admin"]);
+Utils::addRoute('deletetask', 'TasksCtrl', ["user", "admin"]);
+Utils::addRoute('renametask', 'TasksCtrl', ["user", "admin"]);
+Utils::addRoute('redescriptiontask', 'TasksCtrl', ["user", "admin"]);
+Utils::addRoute('reprioritizetask', 'TasksCtrl', ["user", "admin"]);
+
+Utils::addRoute('addstep', 'StepsCtrl', ["user", "admin"]);

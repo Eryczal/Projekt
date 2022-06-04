@@ -12,9 +12,27 @@ use core\Validator;
 class ListsCtrl {
     
     public function action_lists() {
-        $lists = App::getDB()->select("todos", "*", [
+        $v = new Validator();
+        
+        $page = $v->validateFromCleanURL(1, [
+            'int' => true
+        ]);
+
+        if(empty($page)) {
+            $page = 1;
+        }
+
+        $offset = ($page - 1) * 15;
+
+        $listnum = App::getDB()->count("todos", [
             "user_id" => $_SESSION["_todo_app_id"]
         ]);
+
+        $lists = App::getDB()->select("todos", "*", [
+            "user_id" => $_SESSION["_todo_app_id"],
+            "LIMIT" => [$offset, 15]
+        ]);
+
         if(RoleUtils::inRole("user")) {
             $r = "Użytkownik";
         } elseif(RoleUtils::inRole("admin")) {
@@ -26,7 +44,58 @@ class ListsCtrl {
         });
         App::getSmarty()->assign("role", $r);
         App::getSmarty()->assign("lists", $lists);
+        App::getSmarty()->assign("listnum", $listnum);
         App::getSmarty()->display("Lists.tpl");
+    }
+
+    public function action_list() {
+        $list_id = ParamUtils::getFromCleanURL(1,true,"Błędny link");
+
+        $list = App::getDB()->select("todos", "*", [
+            "id" => $list_id
+        ]);
+
+        if(empty($list)) {
+            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do przeglądania tej listy.", \core\Message::ERROR));
+            $list = "error";
+        } else if($list[0]["user_id"] !== $_SESSION["_todo_app_id"] && !RoleUtils::inRole("admin")) {
+            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do przeglądania tej listy.", \core\Message::ERROR));
+            $list = "error";
+        } else {
+            $tasks = App::getDB()->select("tasks", "*", [
+                "todo_id" => $list_id
+            ]);
+                
+            usort($tasks, function($a, $b) {
+                return $a["position"] <=> $b["position"];
+            });
+            
+            $steps = array();
+            for($i = 0; $i < count($tasks); $i++) {
+                $task_id = $tasks[$i]["id"];
+
+                $steps[$i] = App::getDB()->select("steps", "*", [
+                    "task_id" => $task_id
+                ]);
+                
+                usort($steps[$i], function($a, $b) {
+                    return $a["position"] <=> $b["position"];
+                });
+            }
+            
+            App::getSmarty()->assign("tasks", $tasks);
+            App::getSmarty()->assign("steps", $steps);
+        }
+
+        if(RoleUtils::inRole("user")) {
+            $r = "Użytkownik";
+        } elseif(RoleUtils::inRole("admin")) {
+            $r = "Administrator";
+        }
+
+        App::getSmarty()->assign("list", $list);
+        App::getSmarty()->assign("role", $r);
+        App::getSmarty()->display("List.tpl");
     }
 
     public function action_addlist() {
@@ -56,8 +125,22 @@ class ListsCtrl {
         ])[0];
 
         if(RoleUtils::inRole("admin") || $uid == $_SESSION["_todo_app_id"]) {
+            $tasks = App::getDB()->select("tasks", "id", [
+                "todo_id" => $id
+            ]);
+
+            foreach($tasks as $task) {
+                App::getDB()->delete("steps", [
+                    "task_id" => $task
+                ]);
+            }
+
+            App::getDB()->delete("tasks", [
+                "todo_id" => $id
+            ]);
+
             App::getDB()->delete("todos", [
-                "id" => $id,
+                "id" => $id
             ]);
 
             $todos = App::getDB()->select("todos", "*", [
@@ -158,134 +241,24 @@ class ListsCtrl {
 
         $v = new Validator();
 
-        $v->validateFromPost("value", [
-            'int' => true
+        $value = $v->validateFromPost("value", [
+            'int' => true,
+            'min' => 0
         ]);
 
-        $value = intval(ParamUtils::getFromPost("value", true, "Błąd"));
+        if($v->isLastOk()) {
+            $userId = $_SESSION["_todo_app_id"];
 
-        if($value < 0) {
+            App::getDB()->update("todos", [
+                "priority" => $value
+            ], [
+                "id" => $id,
+                "user_id" => $userId
+            ]);
+
+            echo 1; 
+        } else {
             echo 0;
-
-            return;
-        }
-
-        $userId = $_SESSION["_todo_app_id"];
-
-        App::getDB()->update("todos", [
-            "priority" => $value
-        ], [
-            "id" => $id,
-            "user_id" => $userId
-        ]);
-
-        echo 1;
-    }
-
-    public function action_list() {
-        $list_id = ParamUtils::getFromCleanURL(1,true,"Błędny link");
-
-        $list = App::getDB()->select("todos", "*", [
-            "id" => $list_id
-        ]);
-
-        if(empty($list)) {
-            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do przeglądania tej listy.", \core\Message::ERROR));
-            $list = "error";
-        } else if($list[0]["user_id"] !== $_SESSION["_todo_app_id"] && !RoleUtils::inRole("admin")) {
-            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do przeglądania tej listy.", \core\Message::ERROR));
-            $list = "error";
-        } else {
-            $tasks = App::getDB()->select("tasks", "*", [
-                "todo_id" => $list_id
-            ]);
-            
-            $steps = array();
-            for($i = 0; $i < count($tasks); $i++) {
-                $task_id = $tasks[$i]["id"];
-
-                $steps[$i] = App::getDB()->select("steps", "*", [
-                    "task_id" => $task_id
-                ]);
-            }
-            
-            App::getSmarty()->assign("tasks", $tasks);
-            App::getSmarty()->assign("steps", $steps);
-        }
-
-        if(RoleUtils::inRole("user")) {
-            $r = "Użytkownik";
-        } elseif(RoleUtils::inRole("admin")) {
-            $r = "Administrator";
-        }
-
-        App::getSmarty()->assign("list", $list);
-        App::getSmarty()->assign("role", $r);
-        App::getSmarty()->display("List.tpl");
-    }
-
-    public function action_addtask() {
-        $todo_id = ParamUtils::getFromCleanURL(1, true, "Błedny link");
-
-        $list = App::getDB()->select("todos", "*", [
-            "id" => $todo_id
-        ]);
-
-        if($list[0]["user_id"] !== $_SESSION["_todo_app_id"] && !RoleUtils::inRole("admin")) {
-            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do tego.", \core\Message::ERROR));
-        } else {
-            $id = App::getDB()->max("tasks", "position", [
-                "todo_id" => $todo_id
-            ]);
-    
-            App::getDB()->insert("tasks", [
-                "todo_id" => $todo_id,
-                "name" => "Nowe zadanie",
-                "description" => "Opis nowego zadania",
-                "position" => empty($id) ? 1 : $id + 1,
-                "priority" => 0
-            ]);
-    
-            $list = App::getDB()->select("tasks", "*", [
-                "todo_id" => $todo_id
-            ]);
-    
-            echo json_encode($list);
-        }
-    }
-
-    public function action_addstep() {
-        $task_id = ParamUtilss::getFromCleanURL(1, true, "Błędny link");
-
-        $list = App::getDB()->select("tasks", "todo_id", [
-            "id" => $task_id
-        ]);
-
-        $todoList = App::getDB()->select("todos", "user_id", [
-            "id" => $list[0]["todo_id"]
-        ]);
-
-        if($todoList[0]["user_id"]  !== $_SESSION["_todo_app_id"] && !RoleUtils::inRole("admin")) {
-            App::getMessages()->addMessage(new \core\Message("Nie masz uprawnień do tego.", \core\Message::ERROR));
-        } else {
-            $id = App::getDB()->max("steps", "position", [
-                "task_id" => $task_id
-            ]);
-
-            App::getDB()->insert("steps", [
-                "task_id" => $task_id,
-                "name" => "Nowy krok",
-                "description" => "Opis nowego kroku",
-                "position" => $id,
-                "priority" => 0,
-                "completion" => 0
-            ]);
-
-            $steps = App::getDB()->select("steps", "*", [
-                "task_id", $task_id
-            ]);
-
-            echo json_encode($steps);
         }
     }
 }

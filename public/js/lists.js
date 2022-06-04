@@ -33,9 +33,7 @@ function removeList(id) {
             return response.ok ? response.text() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
         })
         .then(response => {
-            if(response == 1) {
-                document.getElementById("plist_" + id).parentNode.remove();
-            }
+            if(response == 1) document.getElementById("plist_" + id).parentNode.remove();
         })
         .catch(error => {
             console.error(error);
@@ -84,3 +82,14 @@ function getPos(id) {
         }
     }
 }
+
+function checkLinks() {
+    var listnum = parseInt(document.getElementById("listnum").textContent);
+    var links = Math.ceil(listnum / 15);
+
+    for(let i = 1; i <= links; i++) {
+        document.getElementById("links").innerHTML += `<a href="http://192.168.1.16/Strony/Projekt/public/lists/${i}">${i}</a> `;
+    }
+}
+
+checkLinks();

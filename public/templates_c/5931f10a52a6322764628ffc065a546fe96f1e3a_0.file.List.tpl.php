@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-06-01 20:33:12
+/* Smarty version 4.1.0, created on 2022-06-04 17:34:46
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\List.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6297b0e8258987_84701115',
+  'unifunc' => 'content_629b7b9674b511_14593048',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5931f10a52a6322764628ffc065a546fe96f1e3a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\List.tpl',
-      1 => 1654108390,
+      1 => 1654356880,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6297b0e8258987_84701115 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629b7b9674b511_14593048 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_936223026297b0e823d0b2_22056949', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1835189853629b7b9671f1c5_46304334', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18861680986297b0e8246df3_62729198', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1257544243629b7b9672a4c2_44654918', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_936223026297b0e823d0b2_22056949 extends Smarty_Internal_Block
+class Block_1835189853629b7b9671f1c5_46304334 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_936223026297b0e823d0b2_22056949',
+    0 => 'Block_1835189853629b7b9671f1c5_46304334',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -93,12 +93,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_18861680986297b0e8246df3_62729198 extends Smarty_Internal_Block
+class Block_1257544243629b7b9672a4c2_44654918 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_18861680986297b0e8246df3_62729198',
+    0 => 'Block_1257544243629b7b9672a4c2_44654918',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -149,8 +149,96 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             </div>
             
             <div id="list_tasks">
+                <?php if ($_smarty_tpl->tpl_vars['tasks']->value != 1 && count((array)$_smarty_tpl->tpl_vars['tasks']->value) > 0) {?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tasks']->value, 'task', false, 'key');
+$_smarty_tpl->tpl_vars['task']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['task']->value) {
+$_smarty_tpl->tpl_vars['task']->do_else = false;
+?>
+                        <div class="task" id="ptask_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+">
+                            <div class="task_container">
+                                <div class="edit_task_position" id="etask_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" ondrop="dropTask(event)" ondragover="dragOverTask(event)">
+                                    <i id="<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all"></i>
+                                </div>
+                                <div class="remove_task" id="rtask_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+">
+                                    <i id="r_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" onclick="removeTask(<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+)" class="mdi mdi-delete-forever"></i>
+                                </div>
+                                <div class="task_priority">
+                                    <div class="edit_container">
+                                        <div class="ib editable">Priorytet: <div id="taskpriority_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="ib"><?php echo $_smarty_tpl->tpl_vars['task']->value["priority"];?>
+</div></div>
+                                        <i onclick="editList('taskpriority', <?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+)" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskpriority_eb_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="editButtons"></div>
+                                    </div>
+                                </div>
+                                <div class="task_info">
+                                    <div class="edit_container">
+                                        <div id="taskname_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="ib editable taskname"><?php echo $_smarty_tpl->tpl_vars['task']->value['name'];?>
+</div>
+                                        <i onclick="editList('taskname', <?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+)" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskname_eb_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="editButtons"></div>
+                                    </div>
+                                    <div class="edit_container">
+                                        <div id="taskdescription_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="ib editable"><?php echo $_smarty_tpl->tpl_vars['task']->value['description'];?>
+</div>
+                                        <i onclick="editList('taskdescription', <?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+)" class="edit-button mdi mdi-pencil-outline"></i>
+                                        <div id="taskdescription_eb_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+" class="editButtons"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="steps" id="steps_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+">
+                                <?php if ($_smarty_tpl->tpl_vars['steps']->value[$_smarty_tpl->tpl_vars['key']->value] != 1 && count((array)$_smarty_tpl->tpl_vars['steps']->value[$_smarty_tpl->tpl_vars['key']->value]) > 0) {?>
+                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['steps']->value[$_smarty_tpl->tpl_vars['key']->value], 'step');
+$_smarty_tpl->tpl_vars['step']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['step']->value) {
+$_smarty_tpl->tpl_vars['step']->do_else = false;
+?>
+                                        <div>
+                                            <p><?php echo $_smarty_tpl->tpl_vars['step']->value['name'];?>
+</p>
+                                            <p><?php echo $_smarty_tpl->tpl_vars['step']->value['description'];?>
+</p>
+                                            <input type="button" id="removeStep_<?php echo $_smarty_tpl->tpl_vars['step']->value['id'];?>
+" value="Usuń krok">
+                                        </div>
+                                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                                    <div class="button_container"><input type="button" id="addStep" value="Dodaj krok"></div>
+                                <?php } else { ?>
+                                    <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
+                                <?php }?>
+                                <input type="button" onclick="addStep(<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+)" class="addButton" value="Dodaj krok">
+                            </div>
+                        </div>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                <?php } else { ?>
+                    <p>Lista nie ma jeszcze żadnych zadań.</p>
+                <?php }?>
             </div>
-            <input type="button" id="addTask" value="Dodaj zadanie">
+            <input type="button" id="addTask" class="addButton" value="Dodaj zadanie">
             <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 /js/list.js"><?php echo '</script'; ?>
