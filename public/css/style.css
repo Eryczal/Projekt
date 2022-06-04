@@ -214,9 +214,19 @@ td, th {
     transform: scale(0.85);
 }
 
+.aS {
+    margin: 20px;
+    margin-top: 0;
+}
+
 .task {
     border: 1px solid #ccc;
     margin: 40px auto;
+}
+
+.step {
+    border: 1px solid #ddd;
+    margin: 10px auto;
 }
 
 .taskname {
@@ -224,22 +234,26 @@ td, th {
     border-bottom: 1px solid #eee;
 }
 
-.task_container {
+.task_container, .step_container {
     display: flex;
     align-items: center;
 }
 
-.edit_task_position, .task_info, .remove_task, .task_priority {
+.edit_task_position, .task_info, .remove_task, .task_priority, .edit_step_position, .step_info, .remove_step, .step_priority, .step_completion {
     padding: 20px;
 }
 
-.remove_task, .task_priority {
+.remove_task, .task_priority, .remove_step, .step_priority, .step_info {
     border-right: 1px solid #ccc;
 }
 
 .steps {
     padding: 20px;
     border-top: 1px solid #ccc;
+}
+
+.completed_step {
+    text-decoration: line-through #666 2px;
 }
 
 .cancel_button {

@@ -121,6 +121,18 @@ function approveEditing(column, id) {
         case "taskpriority":
             link = "reprioritizetask"; 
             break;
+
+        case "stepname":
+            link = "renamestep"; 
+            break;
+
+        case "stepdescription":
+            link = "redescriptionstep"; 
+            break;
+
+        case "steppriority":
+            link = "reprioritizestep"; 
+            break;
     }
 
     var formData = new FormData();
@@ -165,9 +177,10 @@ function dragTask(event) {
 
 function dropTask(event) {
     event.preventDefault();
+    if(event.dataTransfer.getData("text").charAt(0) == "s") return;
     var taskID = event.dataTransfer.getData("text");
-    var oldPos = getPos(taskID);
-    var newPos = getPos(event.currentTarget.children[0].id);
+    var oldPos = getPos("t_u_class", taskID);
+    var newPos = getPos("t_u_class", event.currentTarget.children[0].id);
 
     event.currentTarget.parentNode.parentNode.parentNode.insertBefore(document.getElementById("ptask_" + taskID), oldPos < newPos ? event.currentTarget.parentNode.parentNode.nextSibling : event.currentTarget.parentNode.parentNode);
     
@@ -194,9 +207,9 @@ function dragOverTask(event) {
     event.preventDefault();
 }
 
-function getPos(id) {
-    for(let i = 0; i < document.getElementsByClassName("mdi-arrow-all").length; i++) {
-        if(document.getElementsByClassName("mdi-arrow-all")[i].id == id) {
+function getPos(type, id) {
+    for(let i = 0; i < document.getElementsByClassName(type).length; i++) {
+        if(document.getElementsByClassName(type)[i].id == id) {
             return i + 1;
         }
     }
@@ -205,13 +218,127 @@ function getPos(id) {
 function addStep(id) {
     fetch(`http://192.168.1.16/Strony/Projekt/public/addstep/${id}`)
         .then(response => {
+            return response.ok ? response.json() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
+        })
+        .then(response => {
+            document.getElementById("steps_" + id).insertAdjacentHTML("beforeend",
+            `<div class="step" id="step_${response[0].id}">
+                <div class="step_container">
+                    <div class="edit_step_position" id="estep_${response[0].id}" ondrop="dropStep(event)" ondragover="dragOverStep(event)">
+                        <i id="s${response[0].id}" draggable="true" ondragstart="dragStep(event)" class="mdi mdi-arrow-all s_u_class"></i>
+                    </div>
+                    <div class="remove_step" id="rstep_${response[0].id}">
+                        <i id="rs_${response[0].id}" onclick="removeStep(${response[0].id})" class="mdi mdi-delete-forever"></i>
+                    </div>
+                    <div class="step_priority">
+                        <div class="edit_container">
+                            <div class="ib editable">Priorytet: <div id="steppriority_${response[0].id}" class="ib">${response[0].priority}</div></div>
+                            <i onclick="editList('steppriority', ${response[0].id})" class="edit-button mdi mdi-pencil-outline"></i>
+                            <div id="steppriority_eb_${response[0].id}" class="editButtons"></div>
+                        </div>
+                    </div>
+                    <div class="step_info">
+                        <div class="edit_container">
+                            <div id="stepname_${response[0].id}" class="ib editable stepname">${response[0].name}</div>
+                            <i onclick="editList('stepname', ${response[0].id})" class="edit-button mdi mdi-pencil-outline"></i>
+                            <div id="stepname_eb_${response[0].id}" class="editButtons"></div>
+                        </div>
+                        <div class="edit_container">
+                            <div id="stepdescription_${response[0].id}" class="ib editable">${response[0].description}</div>
+                            <i onclick="editList('stepdescription', ${response[0].id})" class="edit-button mdi mdi-pencil-outline"></i>
+                            <div id="stepdescription_eb_${response[0].id}" class="editButtons"></div>
+                        </div>
+                    </div>
+                    <div class="step_completion">
+                        <input type="checkbox" id="completion_${response[0].id}" class="step_checkbox" onclick="changeCompletion(${response[0].id})">
+                    </div>
+                </div>
+            </div>`
+            );
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function removeStep(id) {
+    var formData = new FormData();
+    formData.append("id", id);
+    fetch("http://192.168.1.16/Strony/Projekt/public/deletestep", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
             return response.ok ? response.text() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
         })
         .then(response => {
-            // document.getElementById("steps_" + id).insertAdjacentHTML("beforeend",
-            // `GIT`
-            // );
-            alert(response)
+            if(response == 1) document.getElementById("step_" + id).remove();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function dragStep(event) {
+    event.dataTransfer.setData("text", (event.target.id));
+}
+
+function dropStep(event) {
+    event.preventDefault();
+
+    if(event.dataTransfer.getData("text").charAt(0) != "s") return;
+    if(document.getElementById(event.dataTransfer.getData("text")).parentNode.parentNode.parentNode.parentNode.id != event.currentTarget.parentNode.parentNode.parentNode.id) return;
+    var stepID = event.dataTransfer.getData("text");
+    var oldPos = getPos("s_u_class", stepID);
+    var newPos = getPos("s_u_class", event.currentTarget.children[0].id);
+
+    event.currentTarget.parentNode.parentNode.parentNode.insertBefore(document.getElementById("step_" + stepID.substring(1)), oldPos < newPos ? event.currentTarget.parentNode.parentNode.nextSibling : event.currentTarget.parentNode.parentNode);
+    
+    var formData = new FormData();
+    formData.append("id", stepID.substring(1));
+    formData.append("oldPos", oldPos);
+    formData.append("newPos", newPos);
+    fetch("http://192.168.1.16/Strony/Projekt/public/movestep", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            return response.ok ? response.text() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
+        })
+        .then(response => {
+            if(response != 1) window.location.reload();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function dragOverStep(event) {
+    event.preventDefault();
+}
+
+function changeCompletion(id) {
+    var formData = new FormData();
+    var check = document.getElementById("completion_" + id).checked ? 1 : 0;
+    formData.append("id", id);
+    formData.append("value", check);
+    fetch("http://192.168.1.16/Strony/Projekt/public/completestep", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            return response.ok ? response.text() : Promise.reject("Błąd " + response.status + ": " + response.statusText);
+        })
+        .then(response => {
+            if(response == 1) {
+                if(check == 1) {
+                    document.getElementById("stepname_" + id).classList.add("completed_step");
+                    document.getElementById("stepdescription_" + id).classList.add("completed_step");
+                } else {
+                    document.getElementById("stepname_" + id).classList.remove("completed_step");
+                    document.getElementById("stepdescription_" + id).classList.remove("completed_step");
+                }
+            }
         })
         .catch(error => {
             console.error(error);

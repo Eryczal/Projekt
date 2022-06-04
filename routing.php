@@ -35,3 +35,9 @@ Utils::addRoute('redescriptiontask', 'TasksCtrl', ["user", "admin"]);
 Utils::addRoute('reprioritizetask', 'TasksCtrl', ["user", "admin"]);
 
 Utils::addRoute('addstep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('movestep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('deletestep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('renamestep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('redescriptionstep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('reprioritizestep', 'StepsCtrl', ["user", "admin"]);
+Utils::addRoute('completestep', 'StepsCtrl', ["user", "admin"]);

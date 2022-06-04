@@ -70,7 +70,7 @@
                         <div class="task" id="ptask_{$task['id']}">
                             <div class="task_container">
                                 <div class="edit_task_position" id="etask_{$task['id']}" ondrop="dropTask(event)" ondragover="dragOverTask(event)">
-                                    <i id="{$task['id']}" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all"></i>
+                                    <i id="{$task['id']}" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all t_u_class"></i>
                                 </div>
                                 <div class="remove_task" id="rtask_{$task['id']}">
                                     <i id="r_{$task['id']}" onclick="removeTask({$task['id']})" class="mdi mdi-delete-forever"></i>
@@ -98,19 +98,44 @@
                             <div class="steps" id="steps_{$task['id']}">
                                 {if $steps[$key] != 1 && count((array)$steps[$key]) > 0}
                                     {foreach $steps[$key] as $step}
-                                        <div>
-                                            <p>{$step['name']}</p>
-                                            <p>{$step['description']}</p>
-                                            <input type="button" id="removeStep_{$step['id']}" value="Usuń krok">
+                                        <div class="step" id="step_{$step['id']}">
+                                            <div class="step_container">
+                                                <div class="edit_step_position" id="estep_{$step['id']}" ondrop="dropStep(event)" ondragover="dragOverStep(event)">
+                                                    <i id="s{$step['id']}" draggable="true" ondragstart="dragStep(event)" class="mdi mdi-arrow-all s_u_class"></i>
+                                                </div>
+                                                <div class="remove_step" id="rstep_{$step['id']}">
+                                                    <i id="rs_{$step['id']}" onclick="removeStep({$step['id']})" class="mdi mdi-delete-forever"></i>
+                                                </div>
+                                                <div class="step_priority">
+                                                    <div class="edit_container">
+                                                        <div class="ib editable">Priorytet: <div id="steppriority_{$step['id']}" class="ib">{$step["priority"]}</div></div>
+                                                        <i onclick="editList('steppriority', {$step['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                                        <div id="steppriority_eb_{$step['id']}" class="editButtons"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="step_info">
+                                                    <div class="edit_container">
+                                                        <div id="stepname_{$step['id']}" class="ib editable stepname {if $step['completion']}completed_step{/if}">{$step['name']}</div>
+                                                        <i onclick="editList('stepname', {$step['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                                        <div id="stepname_eb_{$step['id']}" class="editButtons"></div>
+                                                    </div>
+                                                    <div class="edit_container">
+                                                        <div id="stepdescription_{$step['id']}" class="ib editable {if $step['completion']}completed_step{/if}">{$step['description']}</div>
+                                                        <i onclick="editList('stepdescription', {$step['id']})" class="edit-button mdi mdi-pencil-outline"></i>
+                                                        <div id="stepdescription_eb_{$step['id']}" class="editButtons"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="step_completion">
+                                                    <input type="checkbox" id="completion_{$step['id']}" class="step_checkbox" onclick="changeCompletion({$step['id']})" {if $step['completion']}checked{/if}>
+                                                </div>
+                                            </div>
                                         </div>
                                     {/foreach}
-
-                                    <div class="button_container"><input type="button" id="addStep" value="Dodaj krok"></div>
                                 {else}
                                     <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
                                 {/if}
-                                <input type="button" onclick="addStep({$task['id']})" class="addButton" value="Dodaj krok">
                             </div>
+                            <input type="button" onclick="addStep({$task['id']})" class="addButton aS" value="Dodaj krok">
                         </div>
                     {/foreach}
                 {else}
