@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-06-04 21:26:01
+/* Smarty version 4.1.0, created on 2022-06-05 22:42:49
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\List.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_629bb1c9d7ce60_50328709',
+  'unifunc' => 'content_629d15495ef442_81469195',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5931f10a52a6322764628ffc065a546fe96f1e3a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\List.tpl',
-      1 => 1654370545,
+      1 => 1654461740,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_629bb1c9d7ce60_50328709 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629d15495ef442_81469195 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_471228653629bb1c9d4bad4_59135269', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2044998734629d15495bbeb9_53188414', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1687728510629bb1c9d54fd5_95942388', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1105196760629d15495c5bc8_61955933', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_471228653629bb1c9d4bad4_59135269 extends Smarty_Internal_Block
+class Block_2044998734629d15495bbeb9_53188414 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_471228653629bb1c9d4bad4_59135269',
+    0 => 'Block_2044998734629d15495bbeb9_53188414',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -82,7 +82,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'logout'),$_smarty_tpl ) );?>
+            <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'adminpanel'),$_smarty_tpl ) );?>
 ">
                 <i class="mdi mdi-cogs"></i>
                 <span class="sidebar-text">Zarządzanie</span>
@@ -93,12 +93,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_1687728510629bb1c9d54fd5_95942388 extends Smarty_Internal_Block
+class Block_1105196760629d15495c5bc8_61955933 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_1687728510629bb1c9d54fd5_95942388',
+    0 => 'Block_1105196760629d15495c5bc8_61955933',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -267,7 +267,8 @@ $_smarty_tpl->tpl_vars['step']->do_else = false;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 <?php } else { ?>
-                                    <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
+                                    <p id="e_t_s_<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
+">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
                                 <?php }?>
                             </div>
                             <input type="button" onclick="addStep(<?php echo $_smarty_tpl->tpl_vars['task']->value['id'];?>
@@ -277,7 +278,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 <?php } else { ?>
-                    <p>Lista nie ma jeszcze żadnych zadań.</p>
+                    <p id="e_l_t">Lista nie ma jeszcze żadnych zadań.</p>
                 <?php }?>
             </div>
             <input type="button" id="addTask" class="addButton" value="Dodaj zadanie">

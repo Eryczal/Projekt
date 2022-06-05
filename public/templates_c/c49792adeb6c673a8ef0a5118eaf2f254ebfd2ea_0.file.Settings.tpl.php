@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-06-05 21:46:23
-  from 'C:\xampp\htdocs\Strony\Projekt\app\views\Profile.tpl' */
+/* Smarty version 4.1.0, created on 2022-06-05 21:49:08
+  from 'C:\xampp\htdocs\Strony\Projekt\app\views\Settings.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_629d080fa5b162_99828702',
+  'unifunc' => 'content_629d08b4e0cac4_98336743',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '8cc01e34996c94a53e28b32c19257aaad3feda8d' => 
+    'c49792adeb6c673a8ef0a5118eaf2f254ebfd2ea' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Profile.tpl',
-      1 => 1654458236,
+      0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Settings.tpl',
+      1 => 1654458250,
       2 => 'file',
     ),
   ),
@@ -20,35 +20,35 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_629d080fa5b162_99828702 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629d08b4e0cac4_98336743 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_675164353629d080fa51735_71291559', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_824365278629d08b4e013e4_44010168', 'sidebar');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1541174589629d080fa5a666_66661145', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_869879017629d08b4e0b931_75110219', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_675164353629d080fa51735_71291559 extends Smarty_Internal_Block
+class Block_824365278629d08b4e013e4_44010168 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_675164353629d080fa51735_71291559',
+    0 => 'Block_824365278629d08b4e013e4_44010168',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
     <li class="sidebar-item">
-        <a class="sidebar-link active-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'profile'),$_smarty_tpl ) );?>
+        <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'profile'),$_smarty_tpl ) );?>
 ">
             <i class="mdi mdi-home"></i>
             <span class="sidebar-text">Mój profil</span>
@@ -62,7 +62,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'settings'),$_smarty_tpl ) );?>
+        <a class="sidebar-link active-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'settings'),$_smarty_tpl ) );?>
 ">
             <i class="mdi mdi-cog"></i>
             <span class="sidebar-text">Ustawienia</span>
@@ -93,22 +93,24 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_1541174589629d080fa5a666_66661145 extends Smarty_Internal_Block
+class Block_869879017629d08b4e0b931_75110219 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_1541174589629d080fa5a666_66661145',
+    0 => 'Block_869879017629d08b4e0b931_75110219',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-    <h3>Mój profil</h3>
-    <p>Twój login: <?php echo $_smarty_tpl->tpl_vars['nick']->value;?>
-</p>
-    <p>Zalogowany jako: <?php echo $_smarty_tpl->tpl_vars['role']->value;?>
-</p>
+    <h3>Ustawienia</h3>
+    <p>Tryb ciemny: <input type="checkbox" id="darkMode" onclick="clickDark()"></p>
+    <div><input type="button" id="removeAccount" class="removeButton" value="Usuń konto"></div>
+    <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
+/js/settings.js"><?php echo '</script'; ?>
+>
 <?php
 }
 }

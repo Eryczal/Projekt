@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-28 11:42:39
+/* Smarty version 4.1.0, created on 2022-06-05 16:18:28
   from 'C:\xampp\htdocs\Strony\Projekt\app\views\templates\main_temp.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6291ee8f4dc255_43870955',
+  'unifunc' => 'content_629cbb34878e04_39070626',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b28d2723104278aee4e15049263fa55f81c798ca' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\templates\\main_temp.tpl',
-      1 => 1652746290,
+      1 => 1654438706,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6291ee8f4dc255_43870955 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629cbb34878e04_39070626 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -38,6 +38,10 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 /css/style.css">
+        <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
+/js/darkMode.js"><?php echo '</script'; ?>
+>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.6.96/css/materialdesignicons.min.css">
     </head>
     <body>
@@ -45,14 +49,11 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
             <header class="topbar">
                 <nav class="top-navbar">
                     <div class="navbar-header">
-                        <a class="navbar-brand">
-                            <img class="logo" src="logo-icon.png">
-                            <img class="logo-text" src="logo-text.png">
-                        </a>
+                        <h1>Todo</h1>
                     </div>
                     <div class="navbar-content">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9674838186291ee8f4da920_04744799', 'topnavbar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8520396629cbb34876de7_48582659', 'topnavbar');
 ?>
 
                     </div>
@@ -62,7 +63,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9674838186291ee8f4
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19051355666291ee8f4db317_08952504', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1283315891629cbb34877de8_47354436', 'sidebar');
 ?>
 
                     </nav>
@@ -72,7 +73,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19051355666291ee8f
                 <div class="container">
                     <div class="card">
                         <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15959101766291ee8f4dbb66_90332161', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2052928107629cbb34878677_52740968', 'page');
 ?>
 
                     </div>
@@ -85,12 +86,12 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15959101766291ee8f
     </body>
 </html><?php }
 /* {block 'topnavbar'} */
-class Block_9674838186291ee8f4da920_04744799 extends Smarty_Internal_Block
+class Block_8520396629cbb34876de7_48582659 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'topnavbar' => 
   array (
-    0 => 'Block_9674838186291ee8f4da920_04744799',
+    0 => 'Block_8520396629cbb34876de7_48582659',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -100,12 +101,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'topnavbar'} */
 /* {block 'sidebar'} */
-class Block_19051355666291ee8f4db317_08952504 extends Smarty_Internal_Block
+class Block_1283315891629cbb34877de8_47354436 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_19051355666291ee8f4db317_08952504',
+    0 => 'Block_1283315891629cbb34877de8_47354436',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -115,12 +116,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_15959101766291ee8f4dbb66_90332161 extends Smarty_Internal_Block
+class Block_2052928107629cbb34878677_52740968 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_15959101766291ee8f4dbb66_90332161',
+    0 => 'Block_2052928107629cbb34878677_52740968',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

@@ -12,7 +12,7 @@ document.getElementById("addTask").addEventListener("click", () => {
             `<div class="task" id="ptask_${response[0].id}">
                 <div class="task_container">
                     <div class="edit_task_position" id="etask_${response[0].id}" ondrop="dropTask(event)" ondragover="dragOverTask(event)">
-                        <i id="${response[0].id}" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all"></i>
+                        <i id="${response[0].id}" draggable="true" ondragstart="dragTask(event)" class="mdi mdi-arrow-all t_u_class"></i>
                     </div>
                     <div class="remove_task" id="rtask_${response[0].id}">
                         <i id="r_${response[0].id}" onclick="removeTask(${response[0].id})" class="mdi mdi-delete-forever"></i>
@@ -38,11 +38,14 @@ document.getElementById("addTask").addEventListener("click", () => {
                     </div>
                 </div>
                 <div class="steps" id="steps_${response[0].id}">
-                    <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
-                    <input type="button" onclick="addStep(${response[0].id})" class="addButton" value="Dodaj krok">
+                    <p id="e_t_s_${response[0].id}">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
                 </div>
+                <input type="button" onclick="addStep(${response[0].id})" class="addButton aS" value="Dodaj krok">
             </div>`
             );
+            if(document.getElementById("e_l_t")) {
+                document.getElementById("e_l_t").remove();
+            }
         })
         .catch(error => {
             console.error(error);
@@ -182,6 +185,8 @@ function dropTask(event) {
     var oldPos = getPos("t_u_class", taskID);
     var newPos = getPos("t_u_class", event.currentTarget.children[0].id);
 
+    console.log(oldPos, newPos)
+
     event.currentTarget.parentNode.parentNode.parentNode.insertBefore(document.getElementById("ptask_" + taskID), oldPos < newPos ? event.currentTarget.parentNode.parentNode.nextSibling : event.currentTarget.parentNode.parentNode);
     
     var formData = new FormData();
@@ -255,6 +260,9 @@ function addStep(id) {
                 </div>
             </div>`
             );
+            if(document.getElementById("e_t_s_" + id)) {
+                document.getElementById("e_t_s_" + id).remove();
+            }
         })
         .catch(error => {
             console.error(error);

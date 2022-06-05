@@ -16,7 +16,13 @@ Utils::addRoute('register', 'RegisterCtrl');
 Utils::addRoute('registeruser', 'RegisterCtrl');
 
 Utils::addRoute('profile', 'ProfileCtrl', ["user", "admin"]);
+
 Utils::addRoute('settings', 'SettingsCtrl', ["user", "admin"]);
+Utils::addRoute('deleteaccount', 'SettingsCtrl', ["user", "admin"]);
+
+Utils::addRoute('adminpanel', 'AdminCtrl', ["admin"]);
+Utils::addRoute('deleteuser', 'AdminCtrl', ["admin"]);
+Utils::addRoute('changerole', 'AdminCtrl', ["admin"]);
 
 Utils::addRoute('lists', 'ListsCtrl', ["user", "admin"]);
 Utils::addRoute('list', 'ListsCtrl', ["user", "admin"]);

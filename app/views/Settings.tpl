@@ -2,7 +2,7 @@
 
 {block name=sidebar}
     <li class="sidebar-item">
-        <a class="sidebar-link active-link" href="{url action='profile'}">
+        <a class="sidebar-link" href="{url action='profile'}">
             <i class="mdi mdi-home"></i>
             <span class="sidebar-text">Mój profil</span>
         </a>
@@ -14,7 +14,7 @@
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link" href="{url action='settings'}">
+        <a class="sidebar-link active-link" href="{url action='settings'}">
             <i class="mdi mdi-cog"></i>
             <span class="sidebar-text">Ustawienia</span>
         </a>
@@ -40,7 +40,8 @@
 {/block}
 
 {block name=page}
-    <h3>Mój profil</h3>
-    <p>Twój login: {$nick}</p>
-    <p>Zalogowany jako: {$role}</p>
+    <h3>Ustawienia</h3>
+    <p>Tryb ciemny: <input type="checkbox" id="darkMode" onclick="clickDark()"></p>
+    <div><input type="button" id="removeAccount" class="removeButton" value="Usuń konto"></div>
+    <script src="{$conf->app_url}/js/settings.js"></script>
 {/block}

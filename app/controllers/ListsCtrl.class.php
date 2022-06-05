@@ -70,15 +70,15 @@ class ListsCtrl {
                 return $a["position"] <=> $b["position"];
             });
             
-            $steps = array();
-            for($i = 0; $i < count($tasks); $i++) {
-                $task_id = $tasks[$i]["id"];
-
-                $steps[$i] = App::getDB()->select("steps", "*", [
+            $steps = [];
+            foreach($tasks as $key=>$task) {
+                $task_id = $task["id"];
+                
+                $steps[$key] = App::getDB()->select("steps", "*", [
                     "task_id" => $task_id
                 ]);
                 
-                usort($steps[$i], function($a, $b) {
+                usort($steps[$key], function($a, $b) {
                     return $a["position"] <=> $b["position"];
                 });
             }
@@ -102,6 +102,7 @@ class ListsCtrl {
         $id = App::getDB()->max("todos", "position", [
             "user_id" => $_SESSION["_todo_app_id"]
         ]);
+
         App::getDB()->insert("todos", [
             "user_id" => $_SESSION["_todo_app_id"],
             "name" => "Nowa lista",
@@ -109,6 +110,7 @@ class ListsCtrl {
             "position" => empty($id) ? 1 : $id + 1,
             "priority" => 0
         ]);
+
         $list = App::getDB()->select("todos", "*", [
             "user_id" => $_SESSION["_todo_app_id"],
             "id" => App::getDB()->id()

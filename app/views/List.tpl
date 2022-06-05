@@ -31,7 +31,7 @@
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{url action='logout'}">
+            <a class="sidebar-link" href="{url action='adminpanel'}">
                 <i class="mdi mdi-cogs"></i>
                 <span class="sidebar-text">Zarządzanie</span>
             </a>
@@ -132,14 +132,14 @@
                                         </div>
                                     {/foreach}
                                 {else}
-                                    <p id="e_t_s">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
+                                    <p id="e_t_s_{$task['id']}">W tym zadaniu nie ma jeszcze żadnych kroków.</p>
                                 {/if}
                             </div>
                             <input type="button" onclick="addStep({$task['id']})" class="addButton aS" value="Dodaj krok">
                         </div>
                     {/foreach}
                 {else}
-                    <p>Lista nie ma jeszcze żadnych zadań.</p>
+                    <p id="e_l_t">Lista nie ma jeszcze żadnych zadań.</p>
                 {/if}
             </div>
             <input type="button" id="addTask" class="addButton" value="Dodaj zadanie">

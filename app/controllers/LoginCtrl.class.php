@@ -40,7 +40,9 @@ class LoginCtrl {
                     $record = App::getDB()->select("users", "*", [
                         "login" => $login
                     ]);
-                    if(password_verify($pass, $record[0]["pass"])) {
+                    if(empty($record)) {
+                        App::getMessages()->addMessage(new \core\Message("Dane są niepoprawne.", \core\Message::ERROR));
+                    } elseif(password_verify($pass, $record[0]["pass"])) {
                         switch($record[0]["role"]) {
                             case 0:
                                 $role = "user";

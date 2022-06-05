@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{$conf->app_url}/css/style.css">
+        <script src="{$conf->app_url}/js/darkMode.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.6.96/css/materialdesignicons.min.css">
     </head>
     <body>
@@ -18,10 +19,7 @@
             <header class="topbar">
                 <nav class="top-navbar">
                     <div class="navbar-header">
-                        <a class="navbar-brand">
-                            <img class="logo" src="logo-icon.png">
-                            <img class="logo-text" src="logo-text.png">
-                        </a>
+                        <h1>Todo</h1>
                     </div>
                     <div class="navbar-content">
                         {block name=topnavbar} {/block}

@@ -8,7 +8,7 @@
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link active-link" href="{url action='lists'}">
+        <a class="sidebar-link" href="{url action='lists'}">
             <i class="mdi mdi-file-document-multiple-outline"></i>
             <span class="sidebar-text">Moje listy</span>
         </a>
@@ -31,7 +31,7 @@
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{url action='adminpanel'}">
+            <a class="sidebar-link active" href="{url action='adminpanel'}">
                 <i class="mdi mdi-cogs"></i>
                 <span class="sidebar-text">Zarządzanie</span>
             </a>
@@ -39,43 +39,38 @@
     {/if}
 {/block}
 
+
 {block name=page}
     <div style="text-align: center">
-        <h3>Moje listy</h3>
-        <p>Liczba twoich list: <span id="listnum">{$listnum}</span>.</p>
+        <h3>Panel administratora</h3>
+        <p>Liczba użytkowników: <span id="usernum">{$usernum}</span>.</p>
     </div>
     <table>
         <thead>
             <tr>
-                <th></th>
                 <th>ID</th>
-                <th>Nazwa</th>
-                <th>Opis</th>
-                <th>Priorytet</th>
-                <th></th>
+                <th>Login</th>
+                <th>Rola</th>
                 <th></th>
             </tr>
         </thead>
         <tbody id="t_b">
-        {if $lists != 1 && count((array)$lists) > 0}
-            {foreach $lists as $key=>$list}
-                <tr id="list_{$list['id']}">
-                    <td id="plist_{$list['id']}" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="{$list['id']}" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
-                    <td id="id_{$list['id']}">{$list["id"]}</td>
-                    <td>{$list["name"]}</td>
-                    <td>{$list["description"]}</td>
-                    <td>{$list["priority"]}</td>
-                    <td><a href="{$conf->app_url}/list/{$list['id']}"><i class="mdi mdi-dots-vertical"></i></a></td>
-                    <td><i onclick="removeList({$list['id']})" class="mdi mdi-delete-forever"></i></td>
+            {foreach $users as $key=>$user}
+                <tr id="user_{$user['id']}">
+                    <td id="id_{$user['id']}">{$user["id"]}</td>
+                    <td>{$user["login"]}</td>
+                    <td>
+                        <select id="user_role_{$user['id']}" onchange="changeRole({$user['id']})">
+                            <option value="1" {if $user["role"] == 1}selected{/if}>Administrator</option>
+                            <option value="0" {if $user["role"] == 0}selected{/if}>Użytkownik</option>
+                        </select>
+                    </td>
+                    <td><i onclick="removeUser({$user['id']})" class="mdi mdi-delete-forever"></i></td>
                 </tr>
             {/foreach}
-        {else} 
-            <tr id="e_u_l"><td colspan="7">Nie masz jeszcze żadnej listy.</td></tr>
-        {/if}
         </tbody>
     </table>
     <div style="text-align: center" id="links"></div>
-    <div class="button_container"><input type="button" id="addList" class="addButton" value="Dodaj listę"></div>
     {foreach $msgs->getMessages() as $msg}
         <div class="alert {if $msg->isInfo()}alert-success{/if}
             {if $msg->isWarning()}alert-warning{/if}
@@ -83,5 +78,5 @@
             {$msg->text}
         </div>
     {/foreach}
-    <script src="{$conf->app_url}/js/lists.js"></script>
+    <script src="{$conf->app_url}/js/adminpanel.js"></script>
 {/block}

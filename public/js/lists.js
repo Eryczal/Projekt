@@ -6,9 +6,9 @@ document.getElementById("addList").addEventListener("click", () => {
         .then(response => {
             if(document.getElementById("e_u_l")) document.getElementById("e_u_l").remove();
             document.getElementById("t_b").insertAdjacentHTML("beforeend",
-                `<tr>
-                    <td><i class="mdi mdi-arrow-all"></i></td>
-                    <td>${response[0].id}</td>
+                `<tr id="list_${response[0].id}">
+                    <td id="plist_${response[0].id}" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="${response[0].id}" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
+                    <td id="id_${response[0].id}">${response[0].id}</td>
                     <td>${response[0].name}</td>
                     <td>${response[0].description}</td>
                     <td>${response[0].priority}</td>

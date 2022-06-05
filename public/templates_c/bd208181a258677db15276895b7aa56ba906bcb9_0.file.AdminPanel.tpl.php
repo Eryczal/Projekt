@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-06-05 21:56:16
-  from 'C:\xampp\htdocs\Strony\Projekt\app\views\Lists.tpl' */
+/* Smarty version 4.1.0, created on 2022-06-05 22:12:50
+  from 'C:\xampp\htdocs\Strony\Projekt\app\views\AdminPanel.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_629d0a6084d275_83349694',
+  'unifunc' => 'content_629d0e428ee070_75148628',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd270fa9ed3f3a7b0ad37622f6da00ce4d9bb1377' => 
+    'bd208181a258677db15276895b7aa56ba906bcb9' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\Lists.tpl',
-      1 => 1654458972,
+      0 => 'C:\\xampp\\htdocs\\Strony\\Projekt\\app\\views\\AdminPanel.tpl',
+      1 => 1654459967,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,29 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_629d0a6084d275_83349694 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629d0e428ee070_75148628 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1044871705629d0a60831443_91786166', 'sidebar');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_350615305629d0e428d61e2_02952803', 'sidebar');
 ?>
 
 
+
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1216261022629d0a6083b782_47521690', 'page');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_741230654629d0e428df4b1_90734285', 'page');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main_temp.tpl");
 }
 /* {block 'sidebar'} */
-class Block_1044871705629d0a60831443_91786166 extends Smarty_Internal_Block
+class Block_350615305629d0e428d61e2_02952803 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'sidebar' => 
   array (
-    0 => 'Block_1044871705629d0a60831443_91786166',
+    0 => 'Block_350615305629d0e428d61e2_02952803',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -55,7 +56,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link active-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'lists'),$_smarty_tpl ) );?>
+        <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'lists'),$_smarty_tpl ) );?>
 ">
             <i class="mdi mdi-file-document-multiple-outline"></i>
             <span class="sidebar-text">Moje listy</span>
@@ -82,7 +83,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
         <hr style="margin-bottom:30px">
         <p style="margin-bottom: 0">Panel administratora:</p>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'adminpanel'),$_smarty_tpl ) );?>
+            <a class="sidebar-link active" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url'][0], array( array('action'=>'adminpanel'),$_smarty_tpl ) );?>
 ">
                 <i class="mdi mdi-cogs"></i>
                 <span class="sidebar-text">Zarządzanie</span>
@@ -93,72 +94,62 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'sidebar'} */
 /* {block 'page'} */
-class Block_1216261022629d0a6083b782_47521690 extends Smarty_Internal_Block
+class Block_741230654629d0e428df4b1_90734285 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'page' => 
   array (
-    0 => 'Block_1216261022629d0a6083b782_47521690',
+    0 => 'Block_741230654629d0e428df4b1_90734285',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
     <div style="text-align: center">
-        <h3>Moje listy</h3>
-        <p>Liczba twoich list: <span id="listnum"><?php echo $_smarty_tpl->tpl_vars['listnum']->value;?>
+        <h3>Panel administratora</h3>
+        <p>Liczba użytkowników: <span id="usernum"><?php echo $_smarty_tpl->tpl_vars['usernum']->value;?>
 </span>.</p>
     </div>
     <table>
         <thead>
             <tr>
-                <th></th>
                 <th>ID</th>
-                <th>Nazwa</th>
-                <th>Opis</th>
-                <th>Priorytet</th>
-                <th></th>
+                <th>Login</th>
+                <th>Rola</th>
                 <th></th>
             </tr>
         </thead>
         <tbody id="t_b">
-        <?php if ($_smarty_tpl->tpl_vars['lists']->value != 1 && count((array)$_smarty_tpl->tpl_vars['lists']->value) > 0) {?>
             <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lists']->value, 'list', false, 'key');
-$_smarty_tpl->tpl_vars['list']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['list']->value) {
-$_smarty_tpl->tpl_vars['list']->do_else = false;
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['users']->value, 'user', false, 'key');
+$_smarty_tpl->tpl_vars['user']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['user']->value) {
+$_smarty_tpl->tpl_vars['user']->do_else = false;
 ?>
-                <tr id="list_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+                <tr id="user_<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 ">
-                    <td id="plist_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-" ondrop="dropList(event)" ondragover="dragOverList(event)"><i id="<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-" draggable="true" ondragstart="dragList(event)" class="mdi mdi-arrow-all"></i></td>
-                    <td id="id_<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['list']->value["id"];?>
+                    <td id="id_<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['user']->value["id"];?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['list']->value["name"];?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['user']->value["login"];?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['list']->value["description"];?>
-</td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['list']->value["priority"];?>
-</td>
-                    <td><a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
-/list/<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-"><i class="mdi mdi-dots-vertical"></i></a></td>
-                    <td><i onclick="removeList(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+                    <td>
+                        <select id="user_role_<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+" onchange="changeRole(<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+)">
+                            <option value="1" <?php if ($_smarty_tpl->tpl_vars['user']->value["role"] == 1) {?>selected<?php }?>>Administrator</option>
+                            <option value="0" <?php if ($_smarty_tpl->tpl_vars['user']->value["role"] == 0) {?>selected<?php }?>>Użytkownik</option>
+                        </select>
+                    </td>
+                    <td><i onclick="removeUser(<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 )" class="mdi mdi-delete-forever"></i></td>
                 </tr>
             <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-        <?php } else { ?> 
-            <tr id="e_u_l"><td colspan="7">Nie masz jeszcze żadnej listy.</td></tr>
-        <?php }?>
         </tbody>
     </table>
     <div style="text-align: center" id="links"></div>
-    <div class="button_container"><input type="button" id="addList" class="addButton" value="Dodaj listę"></div>
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['msgs']->value->getMessages(), 'msg');
 $_smarty_tpl->tpl_vars['msg']->do_else = true;
@@ -176,7 +167,7 @@ $_smarty_tpl->tpl_vars['msg']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
-/js/lists.js"><?php echo '</script'; ?>
+/js/adminpanel.js"><?php echo '</script'; ?>
 >
 <?php
 }
